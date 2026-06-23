@@ -8,9 +8,15 @@ import { QrCode, Users, LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
 export function AdminLayoutClient({
   children,
   businessName,
+  primaryColor,
+  secondaryColor,
+  logoUrl,
 }: {
   children: ReactNode
   businessName: string
+  primaryColor?: string
+  secondaryColor?: string
+  logoUrl?: string
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
@@ -25,12 +31,26 @@ export function AdminLayoutClient({
   const closeSidebar = () => setIsOpen(false)
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col md:flex-row">
+    <div className="min-h-screen bg-primary text-white flex flex-col md:flex-row">
+      {(primaryColor || secondaryColor) && (
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root, .dark {
+              ${primaryColor ? `--primary: ${primaryColor}; --ring: ${primaryColor};` : ''}
+              ${secondaryColor ? `--secondary: ${secondaryColor};` : ''}
+            }
+          `
+        }} />
+      )}
       {/* Mobile Top Header */}
-      <header className="flex md:hidden items-center justify-between px-6 py-4 bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
+      <header className="flex md:hidden items-center justify-between px-6 py-4 bg-primary/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center border border-primary/20">
-            <QrCode className="w-4 h-4 text-primary" />
+          <div className="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0">
+            {logoUrl ? (
+              <img src={logoUrl} alt={businessName} className="w-full h-full object-cover" />
+            ) : (
+              <QrCode className="w-4 h-4 text-secondary" />
+            )}
           </div>
           <div>
             <span className="text-sm font-bold tracking-tight leading-tight block">{businessName}</span>
@@ -48,13 +68,17 @@ export function AdminLayoutClient({
 
       {/* Sidebar Navigation */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 border-r border-zinc-800 bg-zinc-950 p-6 flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:h-screen ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 border-r border-white/10 bg-primary/95 backdrop-blur-xl p-6 flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:h-screen md:bg-transparent ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="hidden md:flex items-center gap-3 mb-10">
-          <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
-            <QrCode className="w-5 h-5 text-primary" />
+          <div className="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0">
+            {logoUrl ? (
+              <img src={logoUrl} alt={businessName} className="w-full h-full object-cover" />
+            ) : (
+              <QrCode className="w-5 h-5 text-secondary" />
+            )}
           </div>
           <div>
             <span className="text-base font-bold tracking-tight leading-tight block">{businessName}</span>
@@ -73,8 +97,8 @@ export function AdminLayoutClient({
                 onClick={closeSidebar}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                   isActive
-                    ? 'bg-primary text-white font-semibold shadow-[0_0_20px_rgba(99,102,241,0.2)]'
-                    : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                    ? 'bg-secondary text-white font-semibold shadow-lg shadow-secondary/20'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -84,9 +108,9 @@ export function AdminLayoutClient({
           })}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-zinc-900 md:border-none">
+        <div className="mt-auto pt-6 border-t border-white/10 md:border-none">
           <form action="/auth/signout" method="post">
-            <button className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-zinc-400 hover:text-destructive hover:bg-destructive/10 transition-all">
+            <button className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-white/60 hover:text-destructive hover:bg-destructive/10 transition-all">
               <LogOut className="w-5 h-5" />
               <span className="font-medium">Cerrar Sesión</span>
             </button>
@@ -103,7 +127,7 @@ export function AdminLayoutClient({
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto bg-zinc-950 min-h-[calc(100vh-65px)] md:h-screen">
+      <main className="flex-1 overflow-y-auto bg-transparent min-h-[calc(100vh-65px)] md:h-screen">
         <div className="p-4 sm:p-8 max-w-6xl mx-auto">
           {children}
         </div>

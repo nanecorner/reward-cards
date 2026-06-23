@@ -24,7 +24,7 @@ export function VisitsChart({ data }: { data: VisitData[] }) {
 
               {/* Animated Column Bar */}
               <div 
-                className="w-full bg-gradient-to-t from-primary/50 to-primary rounded-t-lg group-hover:from-primary/75 group-hover:to-indigo-400 transition-all duration-500 ease-out shadow-[0_0_15px_rgba(99,102,241,0.2)] group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+                className="w-full bg-gradient-to-t from-white/5 to-secondary/80 rounded-t-lg group-hover:from-white/10 group-hover:to-secondary transition-all duration-500 ease-out shadow-md shadow-secondary/20 group-hover:shadow-lg group-hover:shadow-secondary/40"
                 style={{ height: `${percentage}%`, minHeight: item.count > 0 ? '8px' : '2px' }}
               />
             </div>

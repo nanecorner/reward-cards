@@ -62,26 +62,26 @@ export default async function DashboardPage() {
         <MetricCard 
           title="Total Clientes" 
           value={clientsCount || 0} 
-          icon={<Users className="w-6 h-6 text-indigo-400" />} 
+          icon={<Users className="w-6 h-6 text-secondary" />} 
           trend="Total registrados"
         />
         <MetricCard 
           title="Total Visitas" 
           value={visitsCount || 0} 
-          icon={<QrCode className="w-6 h-6 text-emerald-400" />} 
+          icon={<QrCode className="w-6 h-6 text-secondary" />} 
           trend="Visitas escaneadas"
         />
         <MetricCard 
           title="Recompensas Pendientes" 
           value={rewardsCount || 0} 
-          icon={<Gift className="w-6 h-6 text-amber-400" />} 
+          icon={<Gift className="w-6 h-6 text-secondary" />} 
           trend="Requiere atención"
         />
       </div>
       
       <div className="mt-12 p-6 sm:p-8 border border-zinc-800 rounded-3xl bg-zinc-900/30 glass">
         <div className="flex items-center gap-4 mb-6">
-          <div className="p-3 bg-primary/10 rounded-xl text-primary">
+          <div className="p-3 bg-secondary/10 rounded-xl text-secondary">
             <TrendingUp className="w-6 h-6" />
           </div>
           <div>

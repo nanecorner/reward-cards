@@ -15,14 +15,19 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   const { data: business } = await supabase
     .from('businesses')
-    .select('name')
+    .select('name, primary_color, secondary_color, logo_url')
     .eq('id', profile?.business_id)
     .single()
 
   const businessName = business?.name || 'Loyalty QR'
 
   return (
-    <AdminLayoutClient businessName={businessName}>
+    <AdminLayoutClient 
+      businessName={businessName}
+      primaryColor={business?.primary_color}
+      secondaryColor={business?.secondary_color}
+      logoUrl={business?.logo_url}
+    >
       {children}
     </AdminLayoutClient>
   )

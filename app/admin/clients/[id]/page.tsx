@@ -110,7 +110,7 @@ export default async function ClientDetailPage({
                   href={publicLink} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="shrink-0 p-2 bg-primary hover:bg-primary/90 rounded-lg text-white transition-colors"
+                  className="shrink-0 p-2 bg-secondary hover:bg-secondary/90 rounded-lg text-white transition-colors"
                   title="Abrir Enlace Público"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default async function ClientDetailPage({
         <div className="md:col-span-2 space-y-6">
           <div className="glass rounded-3xl p-6 border border-zinc-800">
             <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-              <User className="w-5 h-5 text-primary" />
+              <User className="w-5 h-5 text-secondary" />
               Información
             </h3>
             <div className="space-y-4">
@@ -144,7 +144,7 @@ export default async function ClientDetailPage({
               </div>
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
                 <span className="text-zinc-400 flex items-center gap-2"><Ticket className="w-4 h-4" /> Visitas Actuales</span>
-                <span className="font-medium text-white text-lg bg-primary/20 text-primary px-3 rounded-full w-fit">{client.current_visits}</span>
+                <span className="font-medium text-white text-lg bg-secondary/20 text-secondary px-3 rounded-full w-fit">{client.current_visits}</span>
               </div>
             </div>
           </div>
@@ -152,16 +152,16 @@ export default async function ClientDetailPage({
           {/* Rewards Section */}
           <div className="glass rounded-3xl p-6 border border-zinc-800 space-y-6">
             <h3 className="text-xl font-semibold flex items-center gap-2">
-              <Gift className="w-5 h-5 text-amber-400" />
+              <Gift className="w-5 h-5 text-secondary" />
               Premios y Recompensas
             </h3>
 
             {pendingRewards.length > 0 ? (
               <div className="space-y-3">
                 {pendingRewards.map((reward) => (
-                  <div key={reward.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl gap-4">
+                  <div key={reward.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-secondary/10 border border-secondary/20 rounded-2xl gap-4">
                     <div>
-                      <h4 className="font-bold text-amber-400 text-lg flex items-center gap-2">
+                      <h4 className="font-bold text-secondary text-lg flex items-center gap-2">
                         <Gift className="w-5 h-5 shrink-0" />
                         ¡Corte de Cabello Gratis Listo!
                       </h4>
@@ -170,7 +170,7 @@ export default async function ClientDetailPage({
                     <form action={redeemRewardAction}>
                       <input type="hidden" name="reward_id" value={reward.id} />
                       <input type="hidden" name="client_id" value={client.id} />
-                      <SubmitButton className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-5 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]">
+                      <SubmitButton className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white font-bold py-2.5 px-5 rounded-xl transition-all shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/40">
                         Canjear Premio
                       </SubmitButton>
                     </form>
@@ -190,7 +190,7 @@ export default async function ClientDetailPage({
                   {redeemedRewards.map((reward) => (
                     <div key={reward.id} className="flex justify-between items-center p-3 bg-zinc-900/20 border border-zinc-850 rounded-xl text-sm">
                       <span className="text-zinc-300 flex items-center gap-2">
-                        <Check className="w-4 h-4 text-emerald-400" />
+                        <Check className="w-4 h-4 text-secondary" />
                         Corte Gratis Canjeado
                       </span>
                       <span className="text-zinc-500 text-xs">
@@ -206,7 +206,7 @@ export default async function ClientDetailPage({
           <div className="flex gap-4">
             <form action={addVisitAction} className="flex-1">
               <input type="hidden" name="client_id" value={client.id} />
-              <SubmitButton className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+              <SubmitButton className="w-full bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-6 rounded-xl transition-all shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/40">
                 Visita Manual +1
               </SubmitButton>
             </form>

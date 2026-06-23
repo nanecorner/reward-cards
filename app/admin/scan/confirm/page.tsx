@@ -51,8 +51,8 @@ export default async function ScanConfirmPage({
 
   return (
     <div className="max-w-md mx-auto text-center space-y-6 mt-12">
-      <div className="mx-auto w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
-        <CheckCircle className="w-8 h-8 text-emerald-500" />
+      <div className="mx-auto w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(var(--secondary),0.2)]">
+        <CheckCircle className="w-8 h-8 text-secondary" />
       </div>
       <h1 className="text-2xl font-bold tracking-tight">Cliente Encontrado</h1>
       
@@ -66,7 +66,7 @@ export default async function ScanConfirmPage({
 
       <form action={addVisitAction}>
         <input type="hidden" name="client_id" value={client.id} />
-        <SubmitButton className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+        <SubmitButton className="w-full bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-6 rounded-xl shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/40">
           Confirmar Visita (+1)
         </SubmitButton>
       </form>

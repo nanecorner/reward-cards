@@ -32,7 +32,7 @@ export function ClientsTable({ clients }: { clients: Client[] }) {
         placeholder="Buscar por nombre o teléfono..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full mb-6 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+        className="w-full mb-6 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
       />
 
       <div className="overflow-x-auto -mx-6 px-6">
@@ -59,7 +59,7 @@ export function ClientsTable({ clients }: { clients: Client[] }) {
                   <td className="py-4 pl-4 font-medium text-white">{client.name}</td>
                   <td className="py-4 text-zinc-400">{client.phone || '-'}</td>
                   <td className="py-4">
-                    <span className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
+                    <span className="text-white font-medium">
                       {client.current_visits}
                     </span>
                   </td>
@@ -69,7 +69,7 @@ export function ClientsTable({ clients }: { clients: Client[] }) {
                   <td className="py-4 pr-4 text-right">
                     <Link
                       href={`/admin/clients/${client.id}`}
-                      className="inline-flex items-center justify-center p-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white transition-all"
+                      className="inline-flex items-center justify-center p-2 rounded-lg hover:bg-secondary/10 text-secondary/70 hover:text-secondary transition-all"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </Link>

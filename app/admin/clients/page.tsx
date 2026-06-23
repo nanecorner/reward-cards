@@ -35,7 +35,7 @@ export default async function ClientsPage() {
         </div>
         <Link
           href="/admin/clients/new"
-          className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-5 rounded-xl transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]"
+          className="bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-5 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/40"
         >
           <Plus className="w-5 h-5" />
           Añadir Cliente

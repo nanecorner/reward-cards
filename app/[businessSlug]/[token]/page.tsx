@@ -12,16 +12,20 @@ export default async function PublicClientPage({
   const { businessSlug, token } = await params
   const supabase = await createClient()
 
-  // Find client by token (token is globally unique)
   const { data: client } = await supabase
     .from('clients')
-    .select('*, businesses(name, id), rewards(*)')
+    .select('*, businesses(name, id, primary_color, secondary_color, logo_url), rewards(*)')
     .eq('public_token', token)
     .single()
 
   if (!client) return notFound()
 
-  const businessName = (client.businesses as any)?.name ?? ''
+  const business = client.businesses as any
+  const businessName = business?.name ?? ''
+  const primaryColor = business?.primary_color
+  const secondaryColor = business?.secondary_color
+  const logoUrl = business?.logo_url
+
   const correctSlug = slugify(businessName)
 
   // Redirect if slug doesn't match (e.g. old QR codes)
@@ -49,15 +53,30 @@ export default async function PublicClientPage({
   const publicLink = `${baseUrl}/${correctSlug}/${client.public_token}`
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-primary text-white relative overflow-hidden flex flex-col">
+      {(primaryColor || secondaryColor) && (
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root, .dark {
+              ${primaryColor ? `--primary: ${primaryColor}; --ring: ${primaryColor};` : ''}
+              ${secondaryColor ? `--secondary: ${secondaryColor};` : ''}
+            }
+          `
+        }} />
+      )}
       {/* Background elements */}
-      <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-primary/20 to-transparent pointer-events-none" />
-      <div className="absolute top-[-100px] right-[-100px] w-64 h-64 bg-primary/30 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
+      <div className="absolute top-[-100px] right-[-100px] w-64 h-64 bg-secondary/30 rounded-full blur-[100px] pointer-events-none" />
 
       <main className="flex-1 max-w-md w-full mx-auto p-6 flex flex-col relative z-10 pt-12 pb-24">
 
-        <header className="text-center mb-10">
-          <h2 className="text-primary font-medium tracking-wide uppercase text-sm mb-2">
+        <header className="text-center mb-10 flex flex-col items-center">
+          {logoUrl && (
+            <div className="w-20 h-20 mb-4 bg-secondary/10 rounded-2xl flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0 shadow-[0_0_20px_rgba(var(--secondary),0.2)]">
+              <img src={logoUrl} alt={businessName} className="w-full h-full object-cover" />
+            </div>
+          )}
+          <h2 className="text-secondary font-medium tracking-wide uppercase text-sm mb-2">
             {businessName || 'Programa de Fidelidad'}
           </h2>
           <h1 className="text-3xl font-bold tracking-tight">¡Hola, {client.name.split(' ')[0]}!</h1>
@@ -85,19 +104,19 @@ export default async function PublicClientPage({
           <div className="flex justify-between items-end mb-6">
             <div>
               <h3 className="font-semibold text-lg flex items-center gap-2">
-                <Star className="w-5 h-5 text-amber-400" />
+                <Star className="w-5 h-5 text-secondary" />
                 Progreso de Fidelidad
               </h3>
               <p className="text-zinc-400 text-sm mt-1">{rewardName}</p>
             </div>
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-500">
-              {currentVisits}<span className="text-lg text-zinc-500 font-medium">/{visitsRequired}</span>
+            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary">
+              {currentVisits}<span className="text-lg text-white/50 font-medium">/{visitsRequired}</span>
             </div>
           </div>
 
-          <div className="relative h-4 bg-zinc-900 rounded-full overflow-hidden mb-4 border border-zinc-800">
+          <div className="relative h-4 bg-black/20 rounded-full overflow-hidden mb-4 border border-white/5">
             <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-amber-500 to-amber-300 rounded-full transition-all duration-1000 ease-out"
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-white/20 to-secondary rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
@@ -111,13 +130,13 @@ export default async function PublicClientPage({
 
         {/* Available Rewards Alert */}
         {pendingRewards.length > 0 && (
-          <div className="mt-8 bg-emerald-500/10 border border-emerald-500/30 rounded-[2rem] p-6 flex items-start gap-4">
-            <div className="bg-emerald-500/20 p-3 rounded-full text-emerald-400 shrink-0">
+          <div className="mt-8 bg-secondary/10 border border-secondary/30 rounded-[2rem] p-6 flex items-start gap-4">
+            <div className="bg-secondary/20 p-3 rounded-full text-secondary shrink-0">
               <Trophy className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-emerald-400 font-semibold mb-1">¡Recompensa Disponible!</h3>
-              <p className="text-sm text-emerald-500/80">
+              <h3 className="text-secondary font-semibold mb-1">¡Recompensa Disponible!</h3>
+              <p className="text-sm text-secondary/80">
                 Tienes {pendingRewards.length} recompensa{pendingRewards.length > 1 ? 's' : ''} pendiente{pendingRewards.length > 1 ? 's' : ''}. Pide al cajero que la canjee.
               </p>
             </div>

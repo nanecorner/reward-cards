@@ -66,7 +66,7 @@ export default async function EditClientPage({
               type="text"
               required
               defaultValue={client.name}
-              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
             />
           </div>
           
@@ -80,7 +80,7 @@ export default async function EditClientPage({
               type="tel"
               required
               defaultValue={client.phone || ''}
-              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
             />
           </div>
 
@@ -93,7 +93,7 @@ export default async function EditClientPage({
               name="birthday"
               type="date"
               defaultValue={client.birthday ? new Date(client.birthday).toISOString().split('T')[0] : ''}
-              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
             />
           </div>
 
@@ -105,7 +105,7 @@ export default async function EditClientPage({
               Cancelar
             </Link>
             <SubmitButton
-              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-xl"
+              className="bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-6 rounded-xl"
               loadingText="Guardando..."
             >
               Guardar Cambios
