@@ -37,7 +37,7 @@ export default async function EditClientPage({
   if (!client) return notFound()
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
+    <div className="max-w-md mx-auto space-y-8">
       <div>
         <Link href={`/admin/clients/${client.id}`} className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />
