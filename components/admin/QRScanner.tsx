@@ -50,9 +50,7 @@ export function QRScanner() {
             }}
             onError={(err) => setError(err.message)}
             components={{
-              audio: true,
               torch: true,
-              countDown: true,
               finder: true
             }}
           />
