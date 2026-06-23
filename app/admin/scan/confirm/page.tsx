@@ -59,7 +59,7 @@ export default async function ScanConfirmPage({
       <div className="glass p-6 rounded-3xl border border-zinc-800 my-8">
         <h2 className="text-xl font-semibold mb-2">{client.name}</h2>
         <p className="text-zinc-400 mb-4">{client.phone || 'Sin teléfono'}</p>
-        <div className="inline-block bg-primary/20 text-primary px-4 py-2 rounded-full font-medium">
+        <div className="inline-block bg-zinc-800/50 text-white px-4 py-2 rounded-full font-medium">
           Visitas Actuales: {client.current_visits}
         </div>
       </div>

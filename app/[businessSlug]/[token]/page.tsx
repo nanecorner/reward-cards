@@ -68,11 +68,11 @@ export default async function PublicClientPage({
       <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
       <div className="absolute top-[-100px] right-[-100px] w-64 h-64 bg-secondary/30 rounded-full blur-[100px] pointer-events-none" />
 
-      <main className="flex-1 max-w-md w-full mx-auto p-6 flex flex-col relative z-10 pt-12 pb-24">
+      <main className="flex-1 max-w-md w-full mx-auto p-4 sm:p-6 flex flex-col relative z-10 pt-4 pb-8 sm:pt-12 sm:pb-24">
 
-        <header className="text-center mb-10 flex flex-col items-center">
+        <header className="text-center mb-6 sm:mb-10 flex flex-col items-center">
           {logoUrl && (
-            <div className="w-20 h-20 mb-4 bg-secondary/10 rounded-2xl flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0 shadow-[0_0_20px_rgba(var(--secondary),0.2)]">
+            <div className="w-14 h-14 sm:w-20 sm:h-20 mb-2 sm:mb-4 bg-secondary/10 rounded-2xl flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0 shadow-[0_0_20px_rgba(var(--secondary),0.2)]">
               <img src={logoUrl} alt={businessName} className="w-full h-full object-cover" />
             </div>
           )}
@@ -83,48 +83,72 @@ export default async function PublicClientPage({
         </header>
 
         {/* QR Code Section */}
-        <div className="glass rounded-[2rem] p-8 border border-white/10 shadow-2xl flex flex-col items-center mb-8 relative group">
+        <div className="glass rounded-[2rem] p-5 sm:p-8 border border-white/10 shadow-2xl flex flex-col items-center mb-4 sm:mb-8 relative group">
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-[2rem] pointer-events-none" />
 
           <div className="bg-white/10 p-3 rounded-full mb-6">
             <QrCode className="w-6 h-6 text-white" />
           </div>
 
-          <div className="bg-white p-4 rounded-3xl shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-transform group-hover:scale-105 duration-500">
-            <QRGenerator value={publicLink} size={200} />
+          <div className="bg-white p-3 sm:p-4 rounded-3xl shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-transform group-hover:scale-105 duration-500">
+            <QRGenerator value={publicLink} size={150} />
           </div>
 
-          <p className="text-zinc-400 text-sm mt-6 text-center max-w-[200px]">
+          <p className="text-zinc-400 text-xs sm:text-sm mt-4 sm:mt-6 text-center max-w-[200px]">
             Muestra este código QR en la caja para registrar una visita.
           </p>
         </div>
 
-        {/* Progress Section */}
-        <div className="glass rounded-[2rem] p-8 border border-white/10 relative overflow-hidden">
-          <div className="flex justify-between items-end mb-6">
-            <div>
-              <h3 className="font-semibold text-lg flex items-center gap-2">
-                <Star className="w-5 h-5 text-secondary" />
-                Progreso de Fidelidad
-              </h3>
-              <p className="text-zinc-400 text-sm mt-1">{rewardName}</p>
-            </div>
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary">
-              {currentVisits}<span className="text-lg text-white/50 font-medium">/{visitsRequired}</span>
-            </div>
+        {/* Stamp Card Section */}
+        <div className="glass rounded-[2rem] p-5 sm:p-8 border border-white/10 relative overflow-hidden mb-4 sm:mb-8">
+          <div className="text-center mb-6 sm:mb-10">
+            <h3 className="font-medium text-xs sm:text-base text-white uppercase tracking-[0.2em] mb-1 sm:mb-2 leading-relaxed">
+              Desbloquea tu premio
+              <br />
+              completando la tarjeta
+            </h3>
           </div>
 
-          <div className="relative h-4 bg-black/20 rounded-full overflow-hidden mb-4 border border-white/5">
-            <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-white/20 to-secondary rounded-full transition-all duration-1000 ease-out"
-              style={{ width: `${progressPercentage}%` }}
-            />
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-3 gap-y-5 sm:gap-x-4 sm:gap-y-8 justify-items-center mb-4 sm:mb-6">
+            {Array.from({ length: visitsRequired }).map((_, i) => {
+              const isStamped = i < currentVisits;
+              const isLast = i === visitsRequired - 1;
+
+              return (
+                <div 
+                  key={i}
+                  className={`w-[56px] h-[56px] sm:w-[72px] sm:h-[72px] rounded-full flex flex-col items-center justify-center relative transition-all duration-500 ${
+                    isStamped 
+                      ? 'bg-secondary text-white shadow-[0_0_20px_rgba(var(--secondary),0.3)] scale-105' 
+                      : isLast
+                        ? 'bg-secondary/90 text-white shadow-lg'
+                        : 'border border-white/20 bg-white/5 text-white/40'
+                  }`}
+                >
+                  {isStamped ? (
+                    <div className="w-full h-full flex items-center justify-center rounded-full p-2.5 sm:p-3">
+                      {logoUrl ? (
+                        <img src={logoUrl} alt="Stamp" className="w-full h-full object-contain drop-shadow-md" />
+                      ) : (
+                        <Star className="w-6 h-6 sm:w-8 sm:h-8 fill-current drop-shadow-md" />
+                      )}
+                    </div>
+                  ) : isLast ? (
+                    <span className="font-bold text-[10px] sm:text-sm tracking-widest drop-shadow-md">FREE</span>
+                  ) : (
+                    <div className="text-[7px] sm:text-[9px] uppercase tracking-[0.15em] text-center leading-tight opacity-70">
+                      VIP<br/>Loyalty
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
-          <p className="text-center text-sm text-zinc-400">
+          <p className="text-center text-xs sm:text-sm text-zinc-400 mt-5 sm:mt-8 font-medium">
             {visitsRemaining > 0
-              ? `¡Solo ${visitsRemaining} visitas más para tu recompensa!`
-              : '¡Has alcanzado tu meta!'}
+              ? `¡Solo ${visitsRemaining} visitas más para tu ${rewardName.toLowerCase()}!`
+              : '¡Has completado tu tarjeta!'}
           </p>
         </div>
 
