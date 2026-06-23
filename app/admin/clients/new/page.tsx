@@ -1,6 +1,7 @@
 import { createClientAction } from '@/lib/actions/clients'
 import Link from 'next/link'
 import { ArrowLeft, UserPlus } from 'lucide-react'
+import { SubmitButton } from '@/components/ui/SubmitButton'
 
 export default async function NewClientPage({
   searchParams,
@@ -74,13 +75,12 @@ export default async function NewClientPage({
             >
               Cancelar
             </Link>
-            <button
-              type="submit"
-              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-xl transition-all flex items-center gap-2"
+            <SubmitButton
+              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-xl"
+              loadingText="Registrando..."
             >
-              <UserPlus className="w-5 h-5" />
               Registrar Cliente
-            </button>
+            </SubmitButton>
           </div>
         </form>
       </div>

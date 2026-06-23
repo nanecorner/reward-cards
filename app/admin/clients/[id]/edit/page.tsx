@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, Save } from 'lucide-react'
+import { SubmitButton } from '@/components/ui/SubmitButton'
 
 export default async function EditClientPage({
   params,
@@ -103,13 +104,12 @@ export default async function EditClientPage({
             >
               Cancelar
             </Link>
-            <button
-              type="submit"
-              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-xl transition-all flex items-center gap-2"
+            <SubmitButton
+              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-xl"
+              loadingText="Guardando..."
             >
-              <Save className="w-5 h-5" />
               Guardar Cambios
-            </button>
+            </SubmitButton>
           </div>
         </form>
       </div>

@@ -1,9 +1,11 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, User, Phone, Calendar, Copy, ExternalLink, Ticket, Cake, Edit, MessageCircle } from 'lucide-react'
+import { ArrowLeft, User, Phone, Calendar, Copy, ExternalLink, Ticket, Cake, Edit, MessageCircle, Gift, Check } from 'lucide-react'
 import { QRGenerator } from '@/components/client/QRGenerator'
 import { addVisitAction } from '@/lib/actions/visits'
+import { redeemRewardAction } from '@/lib/actions/rewards'
+import { SubmitButton } from '@/components/ui/SubmitButton'
 import { slugify } from '@/lib/utils'
 
 export default async function ClientDetailPage({
@@ -34,6 +36,14 @@ export default async function ClientDetailPage({
 
   if (!client) return notFound()
 
+  // Get client rewards
+  const { data: rewards } = await supabase
+    .from('rewards')
+    .select('*')
+    .eq('client_id', id)
+    .eq('business_id', profile.business_id)
+    .order('created_at', { ascending: false })
+
   // Get business name for slug-based URL
   const { data: business } = await supabase
     .from('businesses')
@@ -44,6 +54,9 @@ export default async function ClientDetailPage({
   const businessSlug = slugify(business?.name || '')
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
   const publicLink = `${baseUrl}/${businessSlug}/${client.public_token}`
+
+  const pendingRewards = rewards?.filter(r => r.status === 'pending') || []
+  const redeemedRewards = rewards?.filter(r => r.status === 'redeemed') || []
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -107,7 +120,7 @@ export default async function ClientDetailPage({
           </div>
         </div>
 
-        {/* Right Column: Details & Stats */}
+        {/* Right Column: Details, Rewards & Stats */}
         <div className="md:col-span-2 space-y-6">
           <div className="glass rounded-3xl p-6 border border-zinc-800">
             <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
@@ -135,13 +148,67 @@ export default async function ClientDetailPage({
               </div>
             </div>
           </div>
+
+          {/* Rewards Section */}
+          <div className="glass rounded-3xl p-6 border border-zinc-800 space-y-6">
+            <h3 className="text-xl font-semibold flex items-center gap-2">
+              <Gift className="w-5 h-5 text-amber-400" />
+              Premios y Recompensas
+            </h3>
+
+            {pendingRewards.length > 0 ? (
+              <div className="space-y-3">
+                {pendingRewards.map((reward) => (
+                  <div key={reward.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl gap-4">
+                    <div>
+                      <h4 className="font-bold text-amber-400 text-lg flex items-center gap-2">
+                        <Gift className="w-5 h-5 shrink-0" />
+                        ¡Corte de Cabello Gratis Listo!
+                      </h4>
+                      <p className="text-sm text-zinc-300">El cliente ha alcanzado las visitas requeridas.</p>
+                    </div>
+                    <form action={redeemRewardAction}>
+                      <input type="hidden" name="reward_id" value={reward.id} />
+                      <input type="hidden" name="client_id" value={client.id} />
+                      <SubmitButton className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-5 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]">
+                        Canjear Premio
+                      </SubmitButton>
+                    </form>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="p-4 bg-zinc-900/40 border border-zinc-850 rounded-2xl text-zinc-400 text-sm">
+                No hay premios pendientes por canjear. Sigue acumulando visitas.
+              </div>
+            )}
+
+            {redeemedRewards.length > 0 && (
+              <div>
+                <h4 className="text-sm font-semibold text-zinc-400 mb-3">Historial de Canjes</h4>
+                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                  {redeemedRewards.map((reward) => (
+                    <div key={reward.id} className="flex justify-between items-center p-3 bg-zinc-900/20 border border-zinc-850 rounded-xl text-sm">
+                      <span className="text-zinc-300 flex items-center gap-2">
+                        <Check className="w-4 h-4 text-emerald-400" />
+                        Corte Gratis Canjeado
+                      </span>
+                      <span className="text-zinc-500 text-xs">
+                        {reward.redeemed_at ? new Date(reward.redeemed_at).toLocaleDateString() : ''}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
           
           <div className="flex gap-4">
             <form action={addVisitAction} className="flex-1">
               <input type="hidden" name="client_id" value={client.id} />
-              <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+              <SubmitButton className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
                 Visita Manual +1
-              </button>
+              </SubmitButton>
             </form>
           </div>
 

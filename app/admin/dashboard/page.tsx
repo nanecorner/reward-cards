@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { Users, QrCode, Gift, TrendingUp } from 'lucide-react'
+import { VisitsChart } from '@/components/admin/VisitsChart'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -12,12 +13,43 @@ export default async function DashboardPage() {
     .eq('id', user?.id)
     .single()
     
-  // Fetch stats (In a real app, you'd want more complex aggregations, but this is an MVP)
-  const [{ count: clientsCount }, { count: visitsCount }, { count: rewardsCount }] = await Promise.all([
+  // Fetch stats and last 7 days of visits
+  const [{ count: clientsCount }, { count: visitsCount }, { count: rewardsCount }, { data: recentVisits }] = await Promise.all([
     supabase.from('clients').select('*', { count: 'exact', head: true }).eq('business_id', profile?.business_id),
     supabase.from('visits').select('*', { count: 'exact', head: true }).eq('business_id', profile?.business_id),
-    supabase.from('rewards').select('*', { count: 'exact', head: true }).eq('business_id', profile?.business_id).eq('status', 'pending')
+    supabase.from('rewards').select('*', { count: 'exact', head: true }).eq('business_id', profile?.business_id).eq('status', 'pending'),
+    supabase
+      .from('visits')
+      .select('created_at')
+      .eq('business_id', profile?.business_id)
+      .order('created_at', { ascending: false })
+      .limit(100)
   ])
+
+  // Process visits data for last 7 days
+  const last7Days = Array.from({ length: 7 }).map((_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - i)
+    return d
+  }).reverse()
+
+  const weekdayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+
+  const chartData = last7Days.map(date => {
+    const dayStr = weekdayNames[date.getDay()]
+    const formattedDate = date.toLocaleDateString('es-MX', { month: 'numeric', day: 'numeric' })
+    
+    // Filter visits matching this day (ignoring time)
+    const count = recentVisits?.filter(visit => {
+      const visitDate = new Date(visit.created_at)
+      return visitDate.toDateString() === date.toDateString()
+    }).length || 0
+
+    return {
+      date: `${dayStr} ${formattedDate}`,
+      count
+    }
+  })
 
   return (
     <div className="space-y-8">
@@ -31,13 +63,13 @@ export default async function DashboardPage() {
           title="Total Clientes" 
           value={clientsCount || 0} 
           icon={<Users className="w-6 h-6 text-indigo-400" />} 
-          trend="+12% desde el mes pasado"
+          trend="Total registrados"
         />
         <MetricCard 
           title="Total Visitas" 
           value={visitsCount || 0} 
           icon={<QrCode className="w-6 h-6 text-emerald-400" />} 
-          trend="+24% desde el mes pasado"
+          trend="Visitas escaneadas"
         />
         <MetricCard 
           title="Recompensas Pendientes" 
@@ -47,20 +79,18 @@ export default async function DashboardPage() {
         />
       </div>
       
-      <div className="mt-12 p-8 border border-zinc-800 rounded-3xl bg-zinc-900/30 glass">
+      <div className="mt-12 p-6 sm:p-8 border border-zinc-800 rounded-3xl bg-zinc-900/30 glass">
         <div className="flex items-center gap-4 mb-6">
           <div className="p-3 bg-primary/10 rounded-xl text-primary">
             <TrendingUp className="w-6 h-6" />
           </div>
           <div>
             <h3 className="text-xl font-semibold">Actividad Reciente</h3>
-            <p className="text-zinc-400">Las últimas visitas registradas</p>
+            <p className="text-zinc-400">Visitas registradas los últimos 7 días</p>
           </div>
         </div>
         
-        <div className="h-64 flex items-center justify-center border-2 border-dashed border-zinc-800 rounded-2xl text-zinc-500">
-          El gráfico de actividad aparecerá aquí cuando escanees más clientes.
-        </div>
+        <VisitsChart data={chartData} />
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { CheckCircle, XCircle } from 'lucide-react'
 import { addVisitAction } from '@/lib/actions/visits'
+import { SubmitButton } from '@/components/ui/SubmitButton'
 
 export default async function ScanConfirmPage({
   searchParams,
@@ -65,10 +66,9 @@ export default async function ScanConfirmPage({
 
       <form action={addVisitAction}>
         <input type="hidden" name="client_id" value={client.id} />
-        <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl transition-all flex justify-center items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
-          <CheckCircle className="w-5 h-5" />
+        <SubmitButton className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
           Confirmar Visita (+1)
-        </button>
+        </SubmitButton>
       </form>
       
       <div className="pt-4">
