@@ -37,7 +37,7 @@ export default async function NewClientPage({
               name="name"
               type="text"
               required
-              className="w-full h-[52px] bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+              className="w-full h-11 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
               placeholder="John Doe"
             />
           </div>
@@ -51,7 +51,7 @@ export default async function NewClientPage({
               name="phone"
               type="tel"
               required
-              className="w-full h-[52px] bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+              className="w-full h-11 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
               placeholder="+1 234 567 8900"
             />
           </div>
@@ -64,7 +64,7 @@ export default async function NewClientPage({
               id="birthday"
               name="birthday"
               type="date"
-              className="w-full h-[52px] bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+              className="w-full h-11 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
             />
           </div>
 
