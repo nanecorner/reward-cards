@@ -128,23 +128,23 @@ export default async function ClientDetailPage({
               Información
             </h3>
             <div className="space-y-4">
-              <div className="flex justify-between py-3 border-b border-zinc-800/50">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
                 <span className="text-zinc-400 flex items-center gap-2"><Phone className="w-4 h-4" /> Teléfono</span>
                 <span className="font-medium text-white">{client.phone || 'No proporcionado'}</span>
               </div>
               {client.birthday && (
-                <div className="flex justify-between py-3 border-b border-zinc-800/50">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
                   <span className="text-zinc-400 flex items-center gap-2"><Cake className="w-4 h-4" /> Fecha de Nacimiento</span>
                   <span className="font-medium text-white">{new Date(client.birthday).toLocaleDateString(undefined, { timeZone: 'UTC' })}</span>
                 </div>
               )}
-              <div className="flex justify-between py-3 border-b border-zinc-800/50">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
                 <span className="text-zinc-400 flex items-center gap-2"><Calendar className="w-4 h-4" /> Registro</span>
                 <span className="font-medium text-white">{new Date(client.created_at).toLocaleDateString()}</span>
               </div>
-              <div className="flex justify-between py-3 border-b border-zinc-800/50">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
                 <span className="text-zinc-400 flex items-center gap-2"><Ticket className="w-4 h-4" /> Visitas Actuales</span>
-                <span className="font-medium text-white text-lg bg-primary/20 text-primary px-3 rounded-full">{client.current_visits}</span>
+                <span className="font-medium text-white text-lg bg-primary/20 text-primary px-3 rounded-full w-fit">{client.current_visits}</span>
               </div>
             </div>
           </div>
