@@ -21,7 +21,7 @@ export default async function NewClientPage({
         <p className="text-zinc-400">Registra un nuevo cliente para tu programa de fidelidad.</p>
       </div>
 
-      <div className="glass rounded-3xl p-8 border border-zinc-800">
+      <div className="glass rounded-3xl p-6 sm:p-8 border border-zinc-800">
         <form action={createClientAction} className="space-y-6">
           {params?.error && (
             <div className="bg-destructive/10 border border-destructive/20 text-destructive-foreground text-sm p-3 rounded-xl mb-6">

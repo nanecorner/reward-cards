@@ -14,7 +14,7 @@ export default async function PublicClientPage({
 
   const { data: client } = await supabase
     .from('clients')
-    .select('*, businesses(name, id, primary_color, secondary_color, logo_url), rewards(*)')
+    .select('*, businesses(name, id, primary_color, secondary_color, text_color, logo_url), rewards(*)')
     .eq('public_token', token)
     .single()
 
@@ -24,6 +24,7 @@ export default async function PublicClientPage({
   const businessName = business?.name ?? ''
   const primaryColor = business?.primary_color
   const secondaryColor = business?.secondary_color
+  const textColor = business?.text_color
   const logoUrl = business?.logo_url
 
   const correctSlug = slugify(businessName)
@@ -53,8 +54,11 @@ export default async function PublicClientPage({
   const publicLink = `${baseUrl}/${correctSlug}/${client.public_token}`
 
   return (
-    <div className="min-h-screen bg-primary text-white relative overflow-hidden flex flex-col">
-      {(primaryColor || secondaryColor) && (
+    <div 
+      className="min-h-screen bg-primary relative overflow-hidden flex flex-col"
+      style={{ color: textColor || 'white' }}
+    >
+      {(primaryColor || secondaryColor || textColor) && (
         <style dangerouslySetInnerHTML={{
           __html: `
             :root, .dark {

@@ -47,7 +47,7 @@ export default async function EditClientPage({
         <p className="text-zinc-400">Actualizar información de {client.name}.</p>
       </div>
 
-      <div className="glass rounded-3xl p-8 border border-zinc-800">
+      <div className="glass rounded-3xl p-6 sm:p-8 border border-zinc-800">
         <form action={updateClientAction} className="space-y-6">
           {sParams?.error && (
             <div className="bg-destructive/10 border border-destructive/20 text-destructive-foreground text-sm p-3 rounded-xl mb-6">
