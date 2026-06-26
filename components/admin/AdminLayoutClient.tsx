@@ -10,12 +10,14 @@ export function AdminLayoutClient({
   businessName,
   primaryColor,
   secondaryColor,
+  textColor,
   logoUrl,
 }: {
   children: ReactNode
   businessName: string
   primaryColor?: string
   secondaryColor?: string
+  textColor?: string
   logoUrl?: string
 }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -31,13 +33,17 @@ export function AdminLayoutClient({
   const closeSidebar = () => setIsOpen(false)
 
   return (
-    <div className="min-h-screen bg-primary text-white flex flex-col md:flex-row">
-      {(primaryColor || secondaryColor) && (
+    <div 
+      className="min-h-screen bg-primary flex flex-col md:flex-row"
+      style={{ color: textColor || 'white' }}
+    >
+      {(primaryColor || secondaryColor || textColor) && (
         <style dangerouslySetInnerHTML={{
           __html: `
             :root, .dark {
               ${primaryColor ? `--primary: ${primaryColor}; --ring: ${primaryColor};` : ''}
               ${secondaryColor ? `--secondary: ${secondaryColor};` : ''}
+              ${textColor ? `--foreground: ${textColor};` : ''}
             }
           `
         }} />
@@ -54,13 +60,13 @@ export function AdminLayoutClient({
           </div>
           <div>
             <span className="text-sm font-bold tracking-tight leading-tight block">{businessName}</span>
-            <span className="text-[10px] text-zinc-500">Panel Admin</span>
+            <span className="text-[10px] opacity-70">Panel Admin</span>
           </div>
         </div>
         <button
           onClick={toggleSidebar}
           aria-label="Toggle menu"
-          className="p-2 -mr-2 rounded-lg hover:bg-zinc-900 text-zinc-400 hover:text-white transition-all"
+          className="p-2 -mr-2 rounded-lg hover:bg-zinc-900 opacity-70 hover:opacity-100 transition-all"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -82,7 +88,7 @@ export function AdminLayoutClient({
           </div>
           <div>
             <span className="text-base font-bold tracking-tight leading-tight block">{businessName}</span>
-            <span className="text-xs text-zinc-500">Panel de administración</span>
+            <span className="text-xs opacity-70">Panel de administración</span>
           </div>
         </div>
 
@@ -98,7 +104,7 @@ export function AdminLayoutClient({
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                   isActive
                     ? 'bg-secondary text-white font-semibold shadow-lg shadow-secondary/20'
-                    : 'text-white/60 hover:text-white hover:bg-white/10'
+                    : 'opacity-60 hover:opacity-100 hover:bg-white/10'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -110,7 +116,7 @@ export function AdminLayoutClient({
 
         <div className="mt-auto pt-6 border-t border-white/10 md:border-none">
           <form action="/auth/signout" method="post">
-            <button className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-white/60 hover:text-destructive hover:bg-destructive/10 transition-all">
+            <button className="flex items-center gap-3 px-4 py-3 w-full rounded-xl opacity-60 hover:text-destructive hover:bg-destructive/10 transition-all">
               <LogOut className="w-5 h-5" />
               <span className="font-medium">Cerrar Sesión</span>
             </button>

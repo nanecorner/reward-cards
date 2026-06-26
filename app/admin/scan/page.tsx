@@ -9,7 +9,7 @@ export default function ScanPage() {
           <QrCode className="w-8 h-8 text-primary" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight mb-2">Escanear Tarjeta</h1>
-        <p className="text-zinc-400">Posiciona el código QR del cliente dentro del recuadro para registrar su visita.</p>
+        <p className="opacity-70">Posiciona el código QR del cliente dentro del recuadro para registrar su visita.</p>
       </div>
 
       <div className="pt-8">

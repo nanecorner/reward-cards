@@ -64,6 +64,7 @@ export default async function PublicClientPage({
             :root, .dark {
               ${primaryColor ? `--primary: ${primaryColor}; --ring: ${primaryColor};` : ''}
               ${secondaryColor ? `--secondary: ${secondaryColor};` : ''}
+              ${textColor ? `--foreground: ${textColor};` : ''}
             }
           `
         }} />
@@ -91,14 +92,14 @@ export default async function PublicClientPage({
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-[2rem] pointer-events-none" />
 
           <div className="bg-white/10 p-3 rounded-full mb-6">
-            <QrCode className="w-6 h-6 text-white" />
+            <QrCode className="w-6 h-6" />
           </div>
 
           <div className="bg-white p-3 sm:p-4 rounded-3xl shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-transform group-hover:scale-105 duration-500">
             <QRGenerator value={publicLink} size={150} />
           </div>
 
-          <p className="text-zinc-400 text-xs sm:text-sm mt-4 sm:mt-6 text-center max-w-[200px]">
+          <p className="opacity-70 text-xs sm:text-sm mt-4 sm:mt-6 text-center max-w-[200px]">
             Muestra este código QR en la caja para registrar una visita.
           </p>
         </div>
@@ -106,7 +107,7 @@ export default async function PublicClientPage({
         {/* Stamp Card Section */}
         <div className="glass rounded-[2rem] p-5 sm:p-8 border border-white/10 relative overflow-hidden mb-4 sm:mb-8">
           <div className="text-center mb-6 sm:mb-10">
-            <h3 className="font-medium text-xs sm:text-base text-white uppercase tracking-[0.2em] mb-1 sm:mb-2 leading-relaxed">
+            <h3 className="font-medium text-xs sm:text-base uppercase tracking-[0.2em] mb-1 sm:mb-2 leading-relaxed">
               Desbloquea tu premio
               <br />
               completando la tarjeta
@@ -126,7 +127,7 @@ export default async function PublicClientPage({
                       ? 'bg-secondary text-white shadow-[0_0_20px_rgba(var(--secondary),0.3)] scale-105' 
                       : isLast
                         ? 'bg-secondary/90 text-white shadow-lg'
-                        : 'border border-white/20 bg-white/5 text-white/40'
+                        : 'border border-white/20 bg-white/5 opacity-40'
                   }`}
                 >
                   {isStamped ? (
@@ -149,7 +150,7 @@ export default async function PublicClientPage({
             })}
           </div>
 
-          <p className="text-center text-xs sm:text-sm text-zinc-400 mt-5 sm:mt-8 font-medium">
+          <p className="text-center text-xs sm:text-sm opacity-70 mt-5 sm:mt-8 font-medium">
             {visitsRemaining > 0
               ? `¡Solo ${visitsRemaining} visitas más para tu ${rewardName.toLowerCase()}!`
               : '¡Has completado tu tarjeta!'}

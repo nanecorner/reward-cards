@@ -61,7 +61,7 @@ export default async function ClientDetailPage({
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div>
-        <Link href="/admin/clients" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-6">
+        <Link href="/admin/clients" className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />
           Volver a Clientes
         </Link>
@@ -72,7 +72,7 @@ export default async function ClientDetailPage({
             Editar
           </Link>
         </div>
-        <p className="text-zinc-400">Perfil del Cliente y Tarjeta de Fidelidad</p>
+        <p className="opacity-70">Perfil del Cliente y Tarjeta de Fidelidad</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -86,15 +86,15 @@ export default async function ClientDetailPage({
             </div>
             
             <div className="mt-2 w-full">
-              <div className="text-sm text-zinc-400 mb-2 text-left font-medium">URL Pública</div>
+              <div className="text-sm opacity-70 mb-2 text-left font-medium">URL Pública</div>
               <div className="flex gap-2">
                 <input 
                   type="text" 
                   readOnly 
                   value={publicLink} 
-                  className="flex-1 min-w-0 bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none"
+                  className="flex-1 min-w-0 bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-2 text-xs opacity-80 focus:outline-none"
                 />
-                <button className="shrink-0 p-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-zinc-300 transition-colors" title="Copiar URL">
+                <button className="shrink-0 p-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg opacity-80 transition-colors" title="Copiar URL">
                   <Copy className="w-4 h-4" />
                 </button>
                 <a 
@@ -129,22 +129,22 @@ export default async function ClientDetailPage({
             </h3>
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
-                <span className="text-zinc-400 flex items-center gap-2"><Phone className="w-4 h-4" /> Teléfono</span>
-                <span className="font-medium text-white">{client.phone || 'No proporcionado'}</span>
+                <span className="opacity-70 flex items-center gap-2"><Phone className="w-4 h-4" /> Teléfono</span>
+                <span className="font-medium">{client.phone || 'No proporcionado'}</span>
               </div>
               {client.birthday && (
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
-                  <span className="text-zinc-400 flex items-center gap-2"><Cake className="w-4 h-4" /> Fecha de Nacimiento</span>
-                  <span className="font-medium text-white">{new Date(client.birthday).toLocaleDateString(undefined, { timeZone: 'UTC' })}</span>
+                  <span className="opacity-70 flex items-center gap-2"><Cake className="w-4 h-4" /> Fecha de Nacimiento</span>
+                  <span className="font-medium">{new Date(client.birthday).toLocaleDateString(undefined, { timeZone: 'UTC' })}</span>
                 </div>
               )}
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
-                <span className="text-zinc-400 flex items-center gap-2"><Calendar className="w-4 h-4" /> Registro</span>
-                <span className="font-medium text-white">{new Date(client.created_at).toLocaleDateString()}</span>
+                <span className="opacity-70 flex items-center gap-2"><Calendar className="w-4 h-4" /> Registro</span>
+                <span className="font-medium">{new Date(client.created_at).toLocaleDateString()}</span>
               </div>
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-800/50 gap-1 sm:gap-4">
-                <span className="text-zinc-400 flex items-center gap-2"><Ticket className="w-4 h-4" /> Visitas Actuales</span>
-                <span className="font-medium text-white text-lg bg-secondary/20 text-secondary px-3 rounded-full w-fit">{client.current_visits}</span>
+                <span className="opacity-70 flex items-center gap-2"><Ticket className="w-4 h-4" /> Visitas Actuales</span>
+                <span className="font-medium text-lg bg-secondary/20 text-secondary px-3 rounded-full w-fit">{client.current_visits}</span>
               </div>
             </div>
           </div>
@@ -165,7 +165,7 @@ export default async function ClientDetailPage({
                         <Gift className="w-5 h-5 shrink-0" />
                         ¡Corte de Cabello Gratis Listo!
                       </h4>
-                      <p className="text-sm text-zinc-300">El cliente ha alcanzado las visitas requeridas.</p>
+                      <p className="text-sm opacity-80">El cliente ha alcanzado las visitas requeridas.</p>
                     </div>
                     <form action={redeemRewardAction}>
                       <input type="hidden" name="reward_id" value={reward.id} />
@@ -178,22 +178,22 @@ export default async function ClientDetailPage({
                 ))}
               </div>
             ) : (
-              <div className="p-4 bg-zinc-900/40 border border-zinc-850 rounded-2xl text-zinc-400 text-sm">
+              <div className="p-4 bg-zinc-900/40 border border-zinc-850 rounded-2xl opacity-70 text-sm">
                 No hay premios pendientes por canjear. Sigue acumulando visitas.
               </div>
             )}
 
             {redeemedRewards.length > 0 && (
               <div>
-                <h4 className="text-sm font-semibold text-zinc-400 mb-3">Historial de Canjes</h4>
+                <h4 className="text-sm font-semibold opacity-70 mb-3">Historial de Canjes</h4>
                 <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                   {redeemedRewards.map((reward) => (
                     <div key={reward.id} className="flex justify-between items-center p-3 bg-zinc-900/20 border border-zinc-850 rounded-xl text-sm">
-                      <span className="text-zinc-300 flex items-center gap-2">
+                      <span className="opacity-80 flex items-center gap-2">
                         <Check className="w-4 h-4 text-secondary" />
                         Corte Gratis Canjeado
                       </span>
-                      <span className="text-zinc-500 text-xs">
+                      <span className="opacity-60 text-xs">
                         {reward.redeemed_at ? new Date(reward.redeemed_at).toLocaleDateString() : ''}
                       </span>
                     </div>

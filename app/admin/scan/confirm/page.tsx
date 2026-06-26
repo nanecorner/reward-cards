@@ -41,7 +41,7 @@ export default async function ScanConfirmPage({
           <XCircle className="w-8 h-8 text-destructive" />
         </div>
         <h1 className="text-2xl font-bold tracking-tight">Código QR Inválido</h1>
-        <p className="text-zinc-400">Este código QR no pertenece a ningún cliente de tu negocio.</p>
+        <p className="opacity-70">Este código QR no pertenece a ningún cliente de tu negocio.</p>
         <Link href="/admin/scan" className="inline-block bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 px-6 rounded-xl transition-all">
           Escanear de Nuevo
         </Link>
@@ -58,7 +58,7 @@ export default async function ScanConfirmPage({
       
       <div className="glass p-6 rounded-3xl border border-zinc-800 my-8">
         <h2 className="text-xl font-semibold mb-2">{client.name}</h2>
-        <p className="text-zinc-400 mb-4">{client.phone || 'Sin teléfono'}</p>
+        <p className="opacity-70 mb-4">{client.phone || 'Sin teléfono'}</p>
         <div className="inline-block bg-zinc-800/50 text-white px-4 py-2 rounded-full font-medium">
           Visitas Actuales: {client.current_visits}
         </div>
@@ -72,7 +72,7 @@ export default async function ScanConfirmPage({
       </form>
       
       <div className="pt-4">
-        <Link href="/admin/scan" className="text-zinc-400 hover:text-white transition-colors">
+        <Link href="/admin/scan" className="opacity-70 hover:opacity-100 transition-colors">
           Cancelar
         </Link>
       </div>

@@ -43,6 +43,7 @@ export default async function PublicRegistrationPage({
             :root, .dark {
               ${primaryColor ? `--primary: ${primaryColor}; --ring: ${primaryColor};` : ''}
               ${secondaryColor ? `--secondary: ${secondaryColor};` : ''}
+              ${textColor ? `--foreground: ${textColor};` : ''}
             }
           `
         }} />
@@ -92,9 +93,8 @@ export default async function PublicRegistrationPage({
                 name="name"
                 type="text"
                 required
-                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 placeholder:text-current placeholder:opacity-40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
                 placeholder="Juan Pérez"
-                style={{ color: 'white' }}
               />
             </div>
             
@@ -107,13 +107,12 @@ export default async function PublicRegistrationPage({
                 name="phone"
                 type="tel"
                 required
-                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 placeholder:text-current placeholder:opacity-40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
                 placeholder="5551234567"
-                style={{ color: 'white' }}
               />
             </div>
 
-            <div className="space-y-2">
+            <div className="flex flex-col space-y-2 w-full">
               <label className="text-sm font-medium opacity-90" htmlFor="birthday">
                 Fecha de Nacimiento <span className="opacity-60 font-normal">(Opcional)</span>
               </label>
@@ -121,8 +120,8 @@ export default async function PublicRegistrationPage({
                 id="birthday"
                 name="birthday"
                 type="date"
-                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
-                style={{ color: 'white' }}
+                className="w-full flex-1 min-w-0 h-12 bg-white/5 border border-white/10 rounded-xl px-4 placeholder:text-current placeholder:opacity-40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+                style={{ WebkitAppearance: 'none' }}
               />
             </div>
 

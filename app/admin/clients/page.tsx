@@ -29,7 +29,7 @@ export default async function ClientsPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold tracking-tight mb-2">Clientes</h1>
-          <p className="text-zinc-400">
+          <p className="opacity-70">
             Administra los miembros de tu programa de fidelidad.
           </p>
         </div>

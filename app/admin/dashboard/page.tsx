@@ -55,7 +55,7 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight mb-2">Panel de Control</h1>
-        <p className="text-zinc-400">Bienvenido. Esto es lo que pasa en tu negocio hoy.</p>
+        <p className="opacity-70">Bienvenido. Esto es lo que pasa en tu negocio hoy.</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -86,7 +86,7 @@ export default async function DashboardPage() {
           </div>
           <div>
             <h3 className="text-xl font-semibold">Actividad Reciente</h3>
-            <p className="text-zinc-400">Visitas registradas los últimos 7 días</p>
+            <p className="opacity-70">Visitas registradas los últimos 7 días</p>
           </div>
         </div>
         
@@ -104,9 +104,9 @@ function MetricCard({ title, value, icon, trend }: { title: string, value: numbe
           {icon}
         </div>
       </div>
-      <h3 className="text-zinc-400 text-sm font-medium mb-1">{title}</h3>
+      <h3 className="opacity-70 text-sm font-medium mb-1">{title}</h3>
       <div className="text-4xl font-bold tracking-tight mb-2">{value}</div>
-      <p className="text-xs text-zinc-500">{trend}</p>
+      <p className="text-xs opacity-60">{trend}</p>
     </div>
   )
 }
