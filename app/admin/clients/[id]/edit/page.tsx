@@ -93,7 +93,7 @@ export default async function EditClientPage({
               name="birthday"
               type="date"
               defaultValue={client.birthday ? new Date(client.birthday).toISOString().split('T')[0] : ''}
-              className="w-full flex-1 min-w-0 h-11 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 placeholder:text-current placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+              className="w-full flex-1 min-w-0 min-h-[3.25rem] bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 placeholder:text-current placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
               style={{ WebkitAppearance: 'none' }}
             />
           </div>

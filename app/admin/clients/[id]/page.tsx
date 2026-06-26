@@ -75,7 +75,7 @@ export default async function ClientDetailPage({
         <p className="opacity-70">Perfil del Cliente y Tarjeta de Fidelidad</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Left Column: QR Code & Link */}
         <div className="space-y-6">
@@ -121,7 +121,7 @@ export default async function ClientDetailPage({
         </div>
 
         {/* Right Column: Details, Rewards & Stats */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6">
           <div className="glass rounded-3xl p-6 border border-zinc-800">
             <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
               <User className="w-5 h-5 text-secondary" />

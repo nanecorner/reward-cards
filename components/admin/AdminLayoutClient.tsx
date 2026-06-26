@@ -34,7 +34,7 @@ export function AdminLayoutClient({
 
   return (
     <div 
-      className="min-h-screen bg-primary flex flex-col md:flex-row"
+      className="min-h-screen bg-primary flex flex-col lg:flex-row"
       style={{ color: textColor || 'white' }}
     >
       {(primaryColor || secondaryColor || textColor) && (
@@ -49,7 +49,7 @@ export function AdminLayoutClient({
         }} />
       )}
       {/* Mobile Top Header */}
-      <header className="flex md:hidden items-center justify-between px-6 py-4 bg-primary/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <header className="flex lg:hidden items-center justify-between px-6 py-4 bg-primary/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0">
             {logoUrl ? (
@@ -74,11 +74,11 @@ export function AdminLayoutClient({
 
       {/* Sidebar Navigation */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 border-r border-white/10 bg-primary/95 backdrop-blur-xl p-6 flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:h-screen md:bg-transparent ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 border-r border-white/10 bg-primary/95 backdrop-blur-xl p-6 flex flex-col transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-screen lg:bg-transparent ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="hidden md:flex items-center gap-3 mb-10">
+        <div className="hidden lg:flex items-center gap-3 mb-10">
           <div className="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center border border-secondary/20 overflow-hidden shrink-0">
             {logoUrl ? (
               <img src={logoUrl} alt={businessName} className="w-full h-full object-cover" />
@@ -92,7 +92,7 @@ export function AdminLayoutClient({
           </div>
         </div>
 
-        <nav className="flex-1 space-y-2 mt-16 md:mt-0">
+        <nav className="flex-1 space-y-2 mt-16 lg:mt-0">
           {links.map((link) => {
             const Icon = link.icon
             const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`)
@@ -114,7 +114,7 @@ export function AdminLayoutClient({
           })}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-white/10 md:border-none">
+        <div className="mt-auto pt-6 border-t border-white/10 lg:border-none">
           <form action="/auth/signout" method="post">
             <button className="flex items-center gap-3 px-4 py-3 w-full rounded-xl opacity-60 hover:text-destructive hover:bg-destructive/10 transition-all">
               <LogOut className="w-5 h-5" />
@@ -128,12 +128,12 @@ export function AdminLayoutClient({
       {isOpen && (
         <div
           onClick={closeSidebar}
-          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden"
         />
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto bg-transparent min-h-[calc(100vh-65px)] md:h-screen">
+      <main className="flex-1 overflow-y-auto bg-transparent min-h-[calc(100vh-65px)] lg:h-screen">
         <div className="p-4 sm:p-8 max-w-6xl mx-auto">
           {children}
         </div>

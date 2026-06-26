@@ -120,7 +120,7 @@ export default async function PublicRegistrationPage({
                 id="birthday"
                 name="birthday"
                 type="date"
-                className="w-full flex-1 min-w-0 h-12 bg-white/5 border border-white/10 rounded-xl px-4 placeholder:text-current placeholder:opacity-40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+                className="w-full flex-1 min-w-0 min-h-[3.25rem] bg-white/5 border border-white/10 rounded-xl px-4 placeholder:text-current placeholder:opacity-40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
                 style={{ WebkitAppearance: 'none' }}
               />
             </div>
