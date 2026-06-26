@@ -64,7 +64,7 @@ export default async function NewClientPage({
               id="birthday"
               name="birthday"
               type="date"
-              className="w-full h-11 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
+              className="block box-border w-full h-11 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
             />
           </div>
 

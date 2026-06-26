@@ -121,7 +121,7 @@ export default async function PublicRegistrationPage({
                 id="birthday"
                 name="birthday"
                 type="date"
-                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all [color-scheme:dark]"
+                className="block box-border w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all [color-scheme:dark]"
                 style={{ color: 'white' }}
               />
             </div>

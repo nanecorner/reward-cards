@@ -25,7 +25,7 @@ export function SubmitButton({
       {pending && (
         <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin shrink-0" />
       )}
-      <span>{pending ? loadingText : children}</span>
+      <span className="flex items-center justify-center gap-2">{pending ? loadingText : children}</span>
     </button>
   )
 }
